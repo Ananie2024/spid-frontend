@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { getProjects } from "../../services/projectService";
 
 export default function Projects() {
-
     const [projects, setProjects] = useState([]);
 
     useEffect(() => {
@@ -19,33 +18,24 @@ export default function Projects() {
     }
 
     return (
-        <div className="container py-5">
-            <h1 className="mb-4">Projects</h1>
+        <div className="max-w-7xl mx-auto px-6 py-12">
+            <h1 className="text-4xl font-bold text-[var(--text-heading)] mb-8">Our Projects</h1>
 
-            <div className="row">
-
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {projects.map(project => (
-                    <div
-                        key={project.id}
-                        className="col-md-4 mb-4"
-                    >
-                        <div className="card h-100 shadow-sm">
-                            <div className="card-body">
-
-                                <h5>
-                                    {project.title}
-                                </h5>
-
-                                <p>
-                                    {project.description}
-                                </p>
-
-                            </div>
-                        </div>
+                    <div key={project.id} className="card h-full flex flex-col">
+                        <h3 className="text-2xl font-bold mb-4 text-[var(--text-heading)]">
+                            {project.title}
+                        </h3>
+                        <p className="text-[var(--text-light)] leading-relaxed">
+                            {project.description}
+                        </p>
                     </div>
                 ))}
-
             </div>
+            {projects.length === 0 && (
+                <p className="text-center text-[var(--text-light)] py-12">No projects found.</p>
+            )}
         </div>
     );
 }
